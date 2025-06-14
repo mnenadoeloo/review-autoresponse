@@ -1,0 +1,52 @@
+image:
+  repository: {{ .Helm.Release.Image }}
+  tag: {{ .Helm.Release.Tag }}
+  pullPolicy: IfNotPresent
+
+env:
+  ENV: {{ .Helm.Release.Environment }}
+  TZ: Europe/Moscow
+
+vault:
+  enabled: true
+  entrypoint: "gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000"
+  env:
+    - services/{{ .Helm.Release.Namespace }}/{{ .Helm.Release.Environment }}/...:
+        ...
+    - services/{{ .Helm.Release.Namespace }}/{{ .Helm.Release.Environment }}/...:
+        ...
+
+imagePullSecrets:
+  - name: harbor-registry-secret
+
+service:
+  enabled: true
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      name: review-autoresponse-listener
+      targetPort: 8000
+      protocol: TCP
+
+resources:
+  requests:
+    memory: 4Gi
+    cpu: 4
+  limits:
+    memory: 8Gi
+    cpu: 4
+
+# Add health check probes
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8000
+  initialDelaySeconds: 30
+  periodSeconds: 90
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8000
+  initialDelaySeconds: 15
+  periodSeconds: 90

@@ -1,0 +1,14 @@
+environment: k8s.ml-dev
+
+httpListenerValues:
+  listenPort: 8000
+
+replicaCount: 1
+
+resources:
+  requests:
+    memory: 4Gi
+    cpu: 4
+  limits:
+    memory: 4Gi
+    cpu: 4
