@@ -37,9 +37,13 @@
 ### API
 
 GET /health — базовая проверка работоспособности
+
 GET /systemhealth — расширенный статус системы
+
 POST /api/v1/llm/batch-chat — пакетная генерация ответов (см. app/models/llm.py)
+
 POST /api/v1/llm/generate-responses — генерация ответов на отзывы (Kafka-формат)
+
 Структура проекта
 
 app/main.py — точка входа FastAPI
