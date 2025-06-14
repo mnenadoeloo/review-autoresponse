@@ -44,7 +44,7 @@ POST /api/v1/llm/batch-chat — пакетная генерация ответо
 
 POST /api/v1/llm/generate-responses — генерация ответов на отзывы (Kafka-формат)
 
-Структура проекта
+### Структура проекта
 
 app/main.py — точка входа FastAPI
 
