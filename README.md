@@ -47,9 +47,15 @@ POST /api/v1/llm/generate-responses — генерация ответов на �
 Структура проекта
 
 app/main.py — точка входа FastAPI
+
 app/services/ — бизнес-логика и интеграции с БД/API
+
 app/models/ — Pydantic-модели данных
+
 app/core/ — настройки, circuit breaker, performance
+
 app/prompts/ — шаблоны промптов для LLM
+
 app/utils/ — утилиты (retry, очередь сообщений)
+
 deploy/ — Dockerfile, Kubernetes-манифесты
